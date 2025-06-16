@@ -33,7 +33,7 @@ pipeline {
         agent {
               docker {
            		image 'maven:3.9.6-amazoncorretto-21'
-           		args '-v /var/lib/jenkins/.m2:/root/.m2'
+           		args '-v /var/lib/jenkins/.m2:/var/lib/jenkins/.m2'
                 } 
         } 
         steps {
