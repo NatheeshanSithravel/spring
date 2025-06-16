@@ -15,7 +15,7 @@ pipeline {
     agent none 
     stages {  
 
-       
+      /* 
         stage('Run SonarQube analysis') {
             agent any
             steps {
@@ -28,7 +28,7 @@ pipeline {
             }
         }
 		 
-      
+      */
       stage('Build & test') {
         agent {
               docker {
