@@ -1,8 +1,8 @@
 pipeline { 
   environment {
-     ENV="rancherDeploy"   //Change the environment accordingly ex: stg for staging and  pr for production
-   	 PROJECT = "api-set-tracker"
- 	 APP_NAME = "api-set-tracker"      //Change the application name , which will also be the deployment name
+     ENV="main"   //Change the environment accordingly ex: stg for staging and  pr for production
+     PROJECT = "spring"
+     APP_NAME = "spring"      //Change the application name , which will also be the deployment name
      // CIR = "${ENV}-docker-reg.mobitel.lk"
      CIR_USER = 'natheeshan'
      CIR_PW = 'Qwerty@123'
@@ -33,7 +33,7 @@ pipeline {
         agent {
               docker {
            		image 'maven:3.9.6-amazoncorretto-21'
-           		args '-v $JENKINS_HOME/.m2:/root/.m2'
+           		args '-v /var/lib/jenkins/.m2:/root/.m2'
                 } 
         } 
         steps {
