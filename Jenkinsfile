@@ -37,7 +37,7 @@ pipeline {
                 } 
         } 
         steps {
-            sh "mvn -Dmaven.test.skip=true clean install -X"
+            sh "mvn -Dmaven.repo.local=/root/.m2/repository -Dmaven.test.skip=true clean install -X"
         }
       }  
 	  stage('Building & Deploy Image') {
