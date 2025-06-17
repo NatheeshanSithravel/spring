@@ -6,7 +6,7 @@ pipeline {
      // CIR = "${ENV}-docker-reg.mobitel.lk"
      CIR_USER = 'natheeshan'
      CIR_PW = 'Qwerty@123'
-     KUB_NAMESPACE = "intsys"               //Change the namespace accordingly
+     KUB_NAMESPACE = "default"               //Change the namespace accordingly
      IMAGE_TAG = "natheeshan/${APP_NAME}:${ENV}.${env.BUILD_NUMBER}"
      EXPOSE_PORT="4040"                    //Change the service expose port accordingly
      HARBOUR_SECRET="harbor-intsys"              //Change the harbour secret name accordingly
