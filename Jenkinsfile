@@ -179,8 +179,8 @@ pipeline {
       
       
       
-        } */
-           /* post {
+        } 
+           post {
             success {
               mail to: 'mobiteldev@mobitel.lk',
                          subject: "${env.JOB_NAME} - Build  ${env.BUILD_NUMBER} - Success!",
@@ -194,6 +194,6 @@ pipeline {
                         body: """${env.JOB_NAME} - Build  ${env.BUILD_NUMBER} - Failed:
                              Check console output at ${env.BUILD_URL} to view the results."""
                   }
-            } */
+            } 
             
-}
+} */
