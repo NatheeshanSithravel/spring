@@ -8,7 +8,7 @@ RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 WORKDIR /app
 
 # Copy the application JAR file
-COPY target/*.jar /app/app.jar
+COPY *.jar /app/app.jar
 
 #set log path previlages
 RUN mkdir -p /logs
