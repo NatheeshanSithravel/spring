@@ -92,14 +92,15 @@ pipeline {
               /* def isDeployed = sh(returnStatus: true, script: 'kubectl -n ${KUB_NAMESPACE} set image deployment/${APP_NAME}  ${APP_NAME}=${IMAGE_TAG}  --record ')
                 if (isDeployed != 0) { */
                         sh '''
-                        minikube kubectl create deployment ${APP_NAME}  --image=${IMAGE_TAG} 
-               	        minikube kubectl expose deployment ${APP_NAME}  --name=${APP_NAME} --port=${EXPOSE_PORT}
+			alias kubectl="minikube kubectl --"
+                        kubectl create deployment ${APP_NAME}  --image=${IMAGE_TAG} 
+               	        kubectl expose deployment ${APP_NAME}  --name=${APP_NAME} --port=${EXPOSE_PORT}
                         
                         ## Replace the harbour image policy secret name
-			   			minikube kubectl -n ${KUB_NAMESPACE} patch deployment ${APP_NAME} --patch \'{"spec": {"template": {"spec": {"imagePullSecrets": [{"name": "'"${HARBOUR_SECRET}"'" }]}}}}\'
+			   			kubectl -n ${KUB_NAMESPACE} patch deployment ${APP_NAME} --patch \'{"spec": {"template": {"spec": {"imagePullSecrets": [{"name": "'"${HARBOUR_SECRET}"'" }]}}}}\'
                         
                         ## Set resource limits
-            			minikube kubectl -n ${KUB_NAMESPACE} patch deployment ${APP_NAME} --type=\'json\' -p=\'[{"op": "add","path": "/spec/template/spec/containers/0/resources","value": {"limits": {"memory": "512Mi"}}}]\'
+            			kubectl -n ${KUB_NAMESPACE} patch deployment ${APP_NAME} --type=\'json\' -p=\'[{"op": "add","path": "/spec/template/spec/containers/0/resources","value": {"limits": {"memory": "512Mi"}}}]\'
 						
 						## Replace the deployment name
 					    ##kubectl -n ${KUB_NAMESPACE} patch deployment $deploy -p \'{"spec":{"template":{"spec":{"containers":[{"name": "'"${APP_NAME}"'","imagePullPolicy":"IfNotPresent"}]}}}}\'
