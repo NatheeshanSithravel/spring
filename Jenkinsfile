@@ -55,11 +55,11 @@ pipeline {
         	}
      }
       
-     /* stage('Trivy-Scan') {
+      stage('Trivy-Scan') {
             agent {
                 docker {
                     image 'aquasec/trivy:latest'
-                    args '--entrypoint="" -v /var/jenkins_home/trivy-reports:/reports -v trivy-cache:/root/.cache/ '
+                    args '--entrypoint="" -v /var/jenkins_home/trivy-reports:/reports -v trivy-cache:/root/.cache/  --user root'
                 }
             }
             steps {
@@ -68,7 +68,7 @@ pipeline {
 
                 }
             }
-           } */
+           } 
       
       stage ('Remove local Image'){
       agent any
@@ -83,7 +83,7 @@ pipeline {
                  docker {
                        //image "${ENV}-docker-reg.mobitel.lk/mobitel_pipeline/cicdtools:1"
                    	   image 'inovadockerimages/cicdtools:latest' 
-                         args '-v /var/lib/jenkins/.cert:/root/.cert'   
+                         args '-v /var/lib/jenkins/.cert:/root/.cert --user root'   
                         }
                     }
              steps {
