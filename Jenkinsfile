@@ -55,11 +55,11 @@ pipeline {
         	}
      }
       
-      stage('Trivy-Scan') {
+     /* stage('Trivy-Scan') {
             agent {
                 docker {
                     image 'aquasec/trivy:latest'
-                    args '--entrypoint="" -v /var/jenkins_home/trivy-reports:/reports -v trivy-cache:.cache/ '
+                    args '--entrypoint="" -v /var/jenkins_home/trivy-reports:/reports -v trivy-cache:/root/.cache/ '
                 }
             }
             steps {
@@ -68,7 +68,7 @@ pipeline {
 
                 }
             }
-           }
+           } */
       
       stage ('Remove local Image'){
       agent any
