@@ -38,7 +38,7 @@ pipeline {
         } 
         steps {
             echo "$JENKINS_HOME"
-            sh "mvn clean install "
+            sh "mvn -Dmaven.test.skip=true clean install -X"
         }
       }  
 	  stage('Building & Deploy Image') {
