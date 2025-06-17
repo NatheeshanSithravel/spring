@@ -70,7 +70,7 @@ pipeline {
                 }
             }
            }
-      */
+     
       stage ('Remove local Image'){
       agent any
            steps {
@@ -78,7 +78,7 @@ pipeline {
             }
       
       }
-     
+      */
         stage('Deploy cluster') {
               agent {
                  docker {
