@@ -99,7 +99,7 @@ pipeline {
 			   			## kubectl -n ${KUB_NAMESPACE} patch deployment ${APP_NAME} --patch \'{"spec": {"template": {"spec": {"imagePullSecrets": [{"name": "'"${HARBOUR_SECRET}"'" }]}}}}\'
                         
                         ## Set resource limits
-            			kubectl -n ${KUB_NAMESPACE} patch deployment ${APP_NAME} --type=\'json\' -p=\'[{"op": "add","path": "/spec/template/spec/containers/0/resources","value": {"limits": {"memory": "512Mi"}}}]\'
+            		minikube kubectl -- patch deployment ${APP_NAME} --type=\'json\' -p=\'[{"op": "add","path": "/spec/template/spec/containers/0/resources","value": {"limits": {"memory": "512Mi"}}}]\'
 						
 						## Replace the deployment name
 					    ##kubectl -n ${KUB_NAMESPACE} patch deployment $deploy -p \'{"spec":{"template":{"spec":{"containers":[{"name": "'"${APP_NAME}"'","imagePullPolicy":"IfNotPresent"}]}}}}\'
