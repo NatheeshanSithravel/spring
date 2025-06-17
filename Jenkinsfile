@@ -193,7 +193,7 @@ pipeline {
                        subject: "${env.JOB_NAME} - Build  ${env.BUILD_NUMBER} - Failed!",
                         body: """${env.JOB_NAME} - Build  ${env.BUILD_NUMBER} - Failed:
                              Check console output at ${env.BUILD_URL} to view the results."""
-                  }
+                  } */
             } 
             
-} */
+} 
