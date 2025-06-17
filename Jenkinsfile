@@ -83,7 +83,7 @@ pipeline {
                  docker {
                        //image "${ENV}-docker-reg.mobitel.lk/mobitel_pipeline/cicdtools:1"
                    	   image 'inovadockerimages/cicdtools:latest' 
-                         args '-v $JENKINS_HOME/.cert:/root/.cert'   
+                         args '-v /var/lib/jenkins/.cert:/root/.cert'   
                         }
                     }
              steps {
