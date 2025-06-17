@@ -7,7 +7,7 @@ pipeline {
      CIR_USER = 'natheeshan'
      CIR_PW = 'Qwerty@123'
      KUB_NAMESPACE = "intsys"               //Change the namespace accordingly
-     IMAGE_TAG = "${APP_NAME}:${ENV}.${env.BUILD_NUMBER}"
+     IMAGE_TAG = "natheeshan/${APP_NAME}:${ENV}.${env.BUILD_NUMBER}"
      EXPOSE_PORT="8080"                    //Change the service expose port accordingly
      HARBOUR_SECRET="harbor-intsys"              //Change the harbour secret name accordingly
      
