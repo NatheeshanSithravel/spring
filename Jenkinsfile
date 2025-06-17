@@ -80,6 +80,7 @@ pipeline {
       }
       */
         stage('Deploy cluster') {
+		agent any
              steps {
                
             /*   sh '''
