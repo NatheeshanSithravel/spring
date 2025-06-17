@@ -80,13 +80,7 @@ pipeline {
       }
       */
         stage('Deploy cluster') {
-              agent {
-                 docker {
-                       //image "${ENV}-docker-reg.mobitel.lk/mobitel_pipeline/cicdtools:1"
-                   	   image 'inovadockerimages/cicdtools:latest' 
-                         args '-v /root/.cert:/root/.cert --user root'   
-                        }
-                    }
+              agent any {
              steps {
                
             /*   sh '''
