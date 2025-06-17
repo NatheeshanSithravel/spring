@@ -92,8 +92,9 @@ pipeline {
               /* def isDeployed = sh(returnStatus: true, script: 'kubectl -n ${KUB_NAMESPACE} set image deployment/${APP_NAME}  ${APP_NAME}=${IMAGE_TAG}  --record ')
                 if (isDeployed != 0) { */
                         sh '''
-                       minikube kubectl -- create deployment ${APP_NAME}  --image=${IMAGE_TAG} 
-               	       minikube kubectl -- expose deployment ${APP_NAME}  --name=${APP_NAME} --port=${EXPOSE_PORT}
+			export HOME=/var/lib/jenkins
+                        minikube kubectl -- create deployment ${APP_NAME}  --image=${IMAGE_TAG} 
+               	        minikube kubectl -- expose deployment ${APP_NAME}  --name=${APP_NAME} --port=${EXPOSE_PORT}
                         
                         ## Replace the harbour image policy secret name
 			   			kubectl -n ${KUB_NAMESPACE} patch deployment ${APP_NAME} --patch \'{"spec": {"template": {"spec": {"imagePullSecrets": [{"name": "'"${HARBOUR_SECRET}"'" }]}}}}\'
