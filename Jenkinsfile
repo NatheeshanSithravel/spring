@@ -48,7 +48,7 @@ pipeline {
               
           		docker login -u ${CIR_USER} -p ${CIR_PW} 
           		mkdir -p dockerImage/
-		  		cp dockerfile dockerImage/
+		  		cp Dockerfile dockerImage/
          		cp target/*.jar dockerImage/
 		     	docker build --tag=${IMAGE_TAG} dockerImage/.
 				docker push ${IMAGE_TAG}
