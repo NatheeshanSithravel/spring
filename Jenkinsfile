@@ -1,8 +1,8 @@
 pipeline { 
   environment {
      ENV="stg"   //Change the environment accordingly ex: stg for staging and  pr for production
-     PROJECT = "spring"
-     APP_NAME = "spring"      //Change the application name , which will also be the deployment name
+   	 PROJECT = "spring-sample"
+ 	 APP_NAME = "spring-sample"      //Change the application name , which will also be the deployment name
      // CIR = "${ENV}-docker-reg.mobitel.lk"
      CIR_USER = 'natheeshan'
      CIR_PW = 'Qwerty@123'
@@ -15,7 +15,7 @@ pipeline {
     agent none 
     stages {  
 
-      /* 
+       /*
         stage('Run SonarQube analysis') {
             agent any
             steps {
@@ -27,17 +27,18 @@ pipeline {
                 }
             }
         }
-		 
-      */
+		 */
+      
       stage('Build & test') {
-        agent {
+       agent { 
               docker {
            		image 'maven:3.9.6-amazoncorretto-21'
-           		args '-v /var/lib/jenkins/.m2:/root/.m2'
+           		args '-v /root/.m2:$JENKINS_HOME/.m2 --user root'
                 } 
         } 
         steps {
-            sh "mvn -Dmaven.repo.local=.m2/repository -Dmaven.test.skip=true clean install -X"
+            echo "$JENKINS_HOME"
+            sh "mvn clean install "
         }
       }  
 	  stage('Building & Deploy Image') {
@@ -47,7 +48,7 @@ pipeline {
               
           		docker login -u ${CIR_USER} -p ${CIR_PW} 
           		mkdir -p dockerImage/
-		  		cp Dockerfile dockerImage/
+		  		cp dockerfile dockerImage/
          		cp target/*.jar dockerImage/
 		     	docker build --tag=${IMAGE_TAG} dockerImage/.
 				docker push ${IMAGE_TAG}
@@ -55,11 +56,11 @@ pipeline {
         	}
      }
       
-      stage('Trivy-Scan') {
+     /* stage('Trivy-Scan') {
             agent {
                 docker {
                     image 'aquasec/trivy:latest'
-                    args '--entrypoint="" -v /var/jenkins_home/trivy-reports:/reports -v trivy-cache:/root/.cache/  --user root'
+                    args '--entrypoint="" -v /var/jenkins_home/trivy-reports:/reports -v trivy-cache:/root/.cache/ --user root'
                 }
             }
             steps {
@@ -68,8 +69,8 @@ pipeline {
 
                 }
             }
-           } 
-      
+           }
+      */
       stage ('Remove local Image'){
       agent any
            steps {
@@ -83,16 +84,16 @@ pipeline {
                  docker {
                        //image "${ENV}-docker-reg.mobitel.lk/mobitel_pipeline/cicdtools:1"
                    	   image 'inovadockerimages/cicdtools:latest' 
-                         args '-v /var/lib/jenkins/.cert:/root/.cert --user root'   
+                         args '-v /root/.cert:/root/.cert --user root'   
                         }
                     }
              steps {
                
-               sh '''
+            /*   sh '''
                
                mkdir -p /root/.kube/
                cp /root/.cert/${ENV}/config /root/.kube/
-               '''
+               ''' */
                script {
                def isDeployed = sh(returnStatus: true, script: 'kubectl -n ${KUB_NAMESPACE} set image deployment/${APP_NAME}  ${APP_NAME}=${IMAGE_TAG}  --record ')
                 if (isDeployed != 0) {
@@ -115,7 +116,7 @@ pipeline {
             }
           }
       
-     stage('GIT URL & Committer Email') {
+   /*  stage('GIT URL & Committer Email') {
           agent any  
           steps {
               script {
@@ -139,7 +140,7 @@ pipeline {
             agent {
                  docker {
                        image 'inovadockerimages/cicdtools:latest' 
-                         args '-v /root/.cert:/root/.cert'   
+                         args '-v /root/.cert:/root/.cert --user root'   
                         }
                     }
             steps {
@@ -178,7 +179,7 @@ pipeline {
       
       
       
-        }
+        } */
            /* post {
             success {
               mail to: 'mobiteldev@mobitel.lk',
