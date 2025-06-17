@@ -96,7 +96,7 @@ pipeline {
                	        minikube kubectl -- expose deployment ${APP_NAME}  --name=${APP_NAME} --port=${EXPOSE_PORT}
                         
                         ## Replace the harbour image policy secret name
-			   			kubectl -n ${KUB_NAMESPACE} patch deployment ${APP_NAME} --patch \'{"spec": {"template": {"spec": {"imagePullSecrets": [{"name": "'"${HARBOUR_SECRET}"'" }]}}}}\'
+			   			# kubectl -n ${KUB_NAMESPACE} patch deployment ${APP_NAME} --patch \'{"spec": {"template": {"spec": {"imagePullSecrets": [{"name": "'"${HARBOUR_SECRET}"'" }]}}}}\'
                         
                         ## Set resource limits
             			kubectl -n ${KUB_NAMESPACE} patch deployment ${APP_NAME} --type=\'json\' -p=\'[{"op": "add","path": "/spec/template/spec/containers/0/resources","value": {"limits": {"memory": "512Mi"}}}]\'
