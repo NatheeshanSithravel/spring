@@ -1,6 +1,6 @@
 pipeline { 
   environment {
-     ENV="main"   //Change the environment accordingly ex: stg for staging and  pr for production
+     ENV="stg"   //Change the environment accordingly ex: stg for staging and  pr for production
      PROJECT = "spring"
      APP_NAME = "spring"      //Change the application name , which will also be the deployment name
      // CIR = "${ENV}-docker-reg.mobitel.lk"
