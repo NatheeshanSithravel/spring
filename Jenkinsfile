@@ -92,7 +92,6 @@ pipeline {
               /* def isDeployed = sh(returnStatus: true, script: 'kubectl -n ${KUB_NAMESPACE} set image deployment/${APP_NAME}  ${APP_NAME}=${IMAGE_TAG}  --record ')
                 if (isDeployed != 0) { */
                         sh '''
-			export HOME=/var/lib/jenkins
                         minikube kubectl -- create deployment ${APP_NAME}  --image=${IMAGE_TAG} 
                	        minikube kubectl -- expose deployment ${APP_NAME}  --name=${APP_NAME} --port=${EXPOSE_PORT}
                         
