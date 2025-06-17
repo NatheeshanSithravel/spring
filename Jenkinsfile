@@ -20,8 +20,8 @@ pipeline {
             agent any
             steps {
                 script {
-                    def scannerHome = tool 'sonarscanner'
-                    withSonarQubeEnv('sonarserver') {
+                    def scannerHome = tool 'sonarr'
+                    withSonarQubeEnv('sonar') {
                         sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=mSMS_performance_monitor_backend -Dsonar.projectName='mSMS_performance_monitor_backend'"
                     }
                 }
