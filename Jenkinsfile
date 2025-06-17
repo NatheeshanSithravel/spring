@@ -95,8 +95,8 @@ pipeline {
                cp /root/.cert/${ENV}/config /root/.kube/
                ''' */
                script {
-               def isDeployed = sh(returnStatus: true, script: 'kubectl -n ${KUB_NAMESPACE} set image deployment/${APP_NAME}  ${APP_NAME}=${IMAGE_TAG}  --record ')
-                if (isDeployed != 0) {
+              /* def isDeployed = sh(returnStatus: true, script: 'kubectl -n ${KUB_NAMESPACE} set image deployment/${APP_NAME}  ${APP_NAME}=${IMAGE_TAG}  --record ')
+                if (isDeployed != 0) { */
                         sh '''
                         kubectl -n ${KUB_NAMESPACE} create deployment ${APP_NAME}  --image=${IMAGE_TAG} 
                			kubectl -n ${KUB_NAMESPACE} expose deployment ${APP_NAME}  --name=${APP_NAME} --port=${EXPOSE_PORT}
@@ -114,7 +114,7 @@ pipeline {
                     }
                }              
             }
-          }
+          
       
    /*  stage('GIT URL & Committer Email') {
           agent any  
