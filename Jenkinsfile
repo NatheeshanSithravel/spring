@@ -22,7 +22,9 @@ pipeline {
                 script {
                     def scannerHome = tool 'sonar'
                     withSonarQubeEnv('sonar') {
-                        sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=mSMS_performance_monitor_backend -Dsonar.projectName='mSMS_performance_monitor_backend'"
+                      //  sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=mSMS_performance_monitor_backend -Dsonar.projectName='mSMS_performance_monitor_backend'"
+			    sh "${scannerHome}/bin/sonar-scanner -Dsonar.sources=./src -Dsonar.java.binaries=. -Dsonar.projectKey=${PROJECT} -Dsonar.projectName=${PROJECT}"
+		
                     }
                 }
             }
