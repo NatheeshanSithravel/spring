@@ -58,7 +58,7 @@ pipeline {
         	}
      }
       
-     /* stage('Trivy-Scan') {
+      stage('Trivy-Scan') {
             agent {
                 docker {
                     image 'aquasec/trivy:latest'
@@ -72,7 +72,7 @@ pipeline {
                 }
             }
            }
-     
+     /*
       stage ('Remove local Image'){
       agent any
            steps {
