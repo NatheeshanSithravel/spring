@@ -95,7 +95,7 @@ pipeline {
                 if (isDeployed != 0) { */
                         sh '''
                         minikube kubectl -- create deployment ${APP_NAME}  --image=${IMAGE_TAG} 
-               	        minikube kubectl -- expose deployment ${APP_NAME}  --name=${APP_NAME} --port=${EXPOSE_PORT}
+               	        minikube kubectl -- expose deployment ${APP_NAME}  --name=${APP_NAME} --type=NodePort --port=${EXPOSE_PORT}
                         
                         ## Replace the harbour image policy secret name
 			   			## kubectl -n ${KUB_NAMESPACE} patch deployment ${APP_NAME} --patch \'{"spec": {"template": {"spec": {"imagePullSecrets": [{"name": "'"${HARBOUR_SECRET}"'" }]}}}}\'
