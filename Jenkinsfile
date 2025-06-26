@@ -30,7 +30,7 @@ pipeline {
             }
         }
 		 
-      
+  /*    
       stage('Build & test') {
        agent { 
               docker {
@@ -72,6 +72,7 @@ pipeline {
                 }
             }
            }
+	   */
      /*
       stage ('Remove local Image'){
       agent any
@@ -81,18 +82,19 @@ pipeline {
       
       }
       */
+	    /*
         stage('Deploy cluster') {
 		agent any
              steps {
                
-            /*   sh '''
+               sh '''
                
                mkdir -p /root/.kube/
                cp /root/.cert/${ENV}/config /root/.kube/
-               ''' */
+               ''' 
                script {
-              /* def isDeployed = sh(returnStatus: true, script: 'kubectl -n ${KUB_NAMESPACE} set image deployment/${APP_NAME}  ${APP_NAME}=${IMAGE_TAG}  --record ')
-                if (isDeployed != 0) { */
+               def isDeployed = sh(returnStatus: true, script: 'kubectl -n ${KUB_NAMESPACE} set image deployment/${APP_NAME}  ${APP_NAME}=${IMAGE_TAG}  --record ')
+                if (isDeployed != 0) { 
                         sh '''
                         minikube kubectl -- create deployment ${APP_NAME}  --image=${IMAGE_TAG} 
                	        minikube kubectl -- expose deployment ${APP_NAME}  --name=${APP_NAME} --type=NodePort --port=${EXPOSE_PORT}
@@ -110,7 +112,7 @@ pipeline {
                     }
                }              
             }
-          
+          */
       
    /*  stage('GIT URL & Committer Email') {
           agent any  
