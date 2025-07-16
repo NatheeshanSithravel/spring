@@ -6,7 +6,7 @@ pipeline {
      // CIR = "${ENV}-docker-reg.mobitel.lk"
      CIR_USER = 'natheeshan'
      CIR_PW = 'Qwerty@123'
-     KUB_NAMESPACE = "default"               //Change the namespace accordingly
+     KUB_NAMESPACE = "Natheeshan"               //Change the namespace accordingly
      IMAGE_TAG = "natheeshan/${APP_NAME}:${ENV}.${env.BUILD_NUMBER}"
      EXPOSE_PORT="4040"                    //Change the service expose port accordingly
      HARBOUR_SECRET="harbor-intsys"              //Change the harbour secret name accordingly
@@ -85,14 +85,14 @@ pipeline {
 		agent any
              steps {
                
-            /*   sh '''
+              sh '''
                
                mkdir -p /root/.kube/
-               cp /root/.cert/${ENV}/config /root/.kube/
-               ''' */
+               cp /home/rancher/.kube/config /root/.kube/
+               ''' 
                script {
-              /* def isDeployed = sh(returnStatus: true, script: 'kubectl -n ${KUB_NAMESPACE} set image deployment/${APP_NAME}  ${APP_NAME}=${IMAGE_TAG}  --record ')
-                if (isDeployed != 0) { */
+               def isDeployed = sh(returnStatus: true, script: 'kubectl -n ${KUB_NAMESPACE} set image deployment/${APP_NAME}  ${APP_NAME}=${IMAGE_TAG}  --record ')
+                if (isDeployed != 0) { 
                         sh '''
                         minikube kubectl -- create deployment ${APP_NAME}  --image=${IMAGE_TAG} 
                	        minikube kubectl -- expose deployment ${APP_NAME}  --name=${APP_NAME} --type=NodePort --port=${EXPOSE_PORT}
