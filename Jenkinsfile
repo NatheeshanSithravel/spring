@@ -91,7 +91,7 @@ pipeline {
                sh '''
                
                mkdir -p /root/.kube/
-               cp /home/rancher/.kube/config /root/.kube/
+               cp /home/rancher/config /root/.kube/
                '''
                script {
                def isDeployed = sh(returnStatus: true, script: 'kubectl -n ${KUB_NAMESPACE} set image deployment/${APP_NAME}  ${APP_NAME}=${IMAGE_TAG}  --record ')
