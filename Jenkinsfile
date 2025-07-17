@@ -31,7 +31,7 @@ pipeline {
       
       stage('Build & test') {
         agent {
-              docker  {
+              dockerContainer  {
            		image 'maven:3.9.6-amazoncorretto-21'
            		args '-v /root/.m2:/root/.m2 --user root'
                 }
@@ -57,7 +57,7 @@ pipeline {
       
       stage('Trivy-Scan') {
             agent {
-                docker  {
+                dockerContainer  {
                     image 'aquasec/trivy:latest'
                     args '--entrypoint="" -v /var/jenkins_home/trivy-reports:/reports -v trivy-cache:/root/.cache/ --user root'
                 }
@@ -80,7 +80,7 @@ pipeline {
      
         stage('Deploy cluster') {
               agent {
-                 docker  {
+                 dockerContainer  {
                        //image "${ENV}-docker-reg.mobitel.lk/mobitel_pipeline/cicdtools:1"
                    	   image 'inovadockerimages/cicdtools:latest' 
                          args '-v /root/.cert:/root/.cert --user root'   
