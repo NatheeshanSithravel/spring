@@ -1,7 +1,7 @@
 pipeline { 
   environment {
      ENV="stg"   //Change the environment accordingly ex: stg for staging and  pr for production
-     PROJECT = "APP"
+     PROJECT = "APP-NEW"
      APP_NAME = "APP"      //Change the application name , which will also be the deployment name
      // CIR = "${ENV}-docker-reg.mobitel.lk"
      CIR_USER = 'natheeshan'
