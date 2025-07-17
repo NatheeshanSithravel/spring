@@ -49,7 +49,7 @@ pipeline {
           		mkdir -p dockerImage/
 		  		cp Dockerfile dockerImage/
          		cp target/*.jar dockerImage/
-		     	docker build --tag=${IMAGE_TAG} dockerImage/.
+		     	docker build ${IMAGE_TAG} dockerImage/.
 				docker push ${IMAGE_TAG}
          '''
         	}
