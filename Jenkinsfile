@@ -2,7 +2,7 @@ pipeline {
   environment {
      ENV="stg"   //Change the environment accordingly ex: stg for staging and  pr for production
      PROJECT = "spring-sample"
-     APP_NAME = "spring-sample"      //Change the application name , which will also be the deployment name
+     APP_NAME = "APP"      //Change the application name , which will also be the deployment name
      // CIR = "${ENV}-docker-reg.mobitel.lk"
      CIR_USER = 'natheeshan'
      CIR_PW = 'Qwerty@123'
@@ -23,7 +23,7 @@ pipeline {
                     def scannerHome = tool 'sonar-scanner'
                     withSonarQubeEnv('sonar-server') {
                       //  sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=mSMS_performance_monitor_backend -Dsonar.projectName='mSMS_performance_monitor_backend'"
-			    sh "${scannerHome}/bin/sonar-scanner -Dsonar.sources=./src -Dsonar.java.binaries=. -Dsonar.projectKey=${PROJECT} -Dsonar.projectName=${PROJECT}"
+			    sh "${scannerHome}/bin/sonar-scanner -Dsonar.sources=./src -Dsonar.java.binaries=. -Dsonar.projectKey=${APP_NAME} -Dsonar.projectName=${PROJECT}"
 		
                     }
                 }
