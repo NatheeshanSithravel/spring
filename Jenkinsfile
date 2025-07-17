@@ -7,9 +7,9 @@ pipeline {
      CIR_USER = 'natheeshan'
      CIR_PW = 'Qwerty@123'
      KUB_NAMESPACE = "db"               //Change the namespace accordingly
-     IMAGE_TAG = "natheeshan/${PROJECT}/${APP_NAME}:${ENV}.${env.BUILD_NUMBER}"
+     IMAGE_TAG = "natheeshan/${APP_NAME}:${ENV}"
      EXPOSE_PORT="8080"                    //Change the service expose port accordingly
-     HARBOUR_SECRET="harbor-intsys"              //Change the harbour secret name accordingly
+  //   HARBOUR_SECRET="harbor-intsys"              //Change the harbour secret name accordingly
      
     }
     agent none 
@@ -47,10 +47,10 @@ pipeline {
               
           		docker login -u ${CIR_USER} -p ${CIR_PW} ${CIR}
           		mkdir -p dockerImage/
-		  		cp Dockerfile dockerImage/
+		  	cp Dockerfile dockerImage/
          		cp target/*.jar dockerImage/
-		     	docker build ${IMAGE_TAG} dockerImage/.
-				docker push ${IMAGE_TAG}
+		     	docker build --tag=${IMAGE_TAG} dockerImage/.
+			docker push ${IMAGE_TAG}
          '''
         	}
      }
