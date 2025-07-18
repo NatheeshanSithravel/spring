@@ -23,7 +23,7 @@ pipeline {
                     def scannerHome = tool 'sonar-scanner'
                     withSonarQubeEnv('sonar-server') {
                       //  sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=mSMS_performance_monitor_backend -Dsonar.projectName='mSMS_performance_monitor_backend'"
-			    sh "${scannerHome}/bin/sonar-scanner -Dsonar.sources=./src -Dsonar.java.binaries=. -Dsonar.projectKey=${APP_NAME} -Dsonar.projectName=${PROJECT} -Dsonar.dependencyCheck.reportPath=dependency-check-report/dependency-check-report.xml"
+			    sh "${scannerHome}/bin/sonar-scanner -Dsonar.sources=./src -Dsonar.java.binaries=target/classes  -Dsonar.projectKey=${APP_NAME} -Dsonar.projectName=${PROJECT} -Dsonar.dependencyCheck.reportPath=dependency-check-report/dependency-check-report.xml"
 		
                     }
                 }
