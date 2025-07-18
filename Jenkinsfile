@@ -15,19 +15,6 @@ pipeline {
     agent none 
     stages {  
 
-	stage('Build & test') {
-       agent { 
-              docker {
-           		image 'maven:3.9.6-amazoncorretto-21'
-           		args '-v /root/.m2:$JENKINS_HOME/.m2 --user root'
-                } 
-        } 
-        steps {
-            echo "$JENKINS_HOME"
-            sh "mvn -Dmaven.test.skip=true clean install -X"
-        }
-      }
-
        
         stage('Run SonarQube analysis') {
             agent any
