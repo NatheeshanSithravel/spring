@@ -24,6 +24,7 @@ pipeline {
            } 
             steps {
                 echo "$JENKINS_HOME"
+		sh "mvn dependency:copy-dependencies -DoutputDirectory=/target/dependency"
                 sh "mvn -Dmaven.test.skip=true clean install -X"
         }
       }
