@@ -23,8 +23,9 @@ pipeline {
       }
       steps {
         echo "$JENKINS_HOME"
-        sh "mvn dependency:copy-dependencies -DoutputDirectory=target/dependency"
         sh "mvn -Dmaven.test.skip=true clean install -X"
+        sh "pwd && ls -l"
+        sh "mvn dependency:copy-dependencies -DoutputDirectory=target/dependency"
         sh "echo 'Listing copied dependencies:' && ls -l target/dependency"
       }
     }
