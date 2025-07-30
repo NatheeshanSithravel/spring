@@ -30,13 +30,29 @@ pipeline {
       }
     }
 
+    stage('Dependency Check Scan') {
+      agent any
+      tools {
+        dependencyCheck 'dep-Check' // Replace with name from Jenkins tool config
+      }
+      steps {
+        dependencyCheckAnalyzer scanpath: '.', format: 'ALL', outputDirectory: 'dependency-check-report'
+      }
+    }
+
+    stage('Publish Dependency Check Report') {
+      agent any
+      steps {
+        dependencyCheckPublisher pattern: 'dependency-check-report/dependency-check-report.xml'
+      }
+    }
+
     stage('Run SonarQube Analysis') {
       agent any
       steps {
         script {
           def scannerHome = tool 'sonar-scanner'
           withSonarQubeEnv('sonar-server') {
-            // Use comma-separated absolute paths if glob fails
             def libs = sh(script: "find target/dependency -name '*.jar' | tr '\\n' ',' | sed 's/,\$//'", returnStdout: true).trim()
 
             if (!libs) {
