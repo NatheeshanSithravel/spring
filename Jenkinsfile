@@ -33,7 +33,7 @@ pipeline {
     stage('Dependency Check Scan') {
       agent any
       tools {
-        dependencyCheck 'dep-Check' // Replace with name from Jenkins tool config
+        dependencyCheck 'dep-check' // Replace with name from Jenkins tool config
       }
       steps {
         dependencyCheckAnalyzer scanpath: '.', format: 'ALL', outputDirectory: 'dependency-check-report'
