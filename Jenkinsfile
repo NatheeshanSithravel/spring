@@ -1,4 +1,4 @@
-@Library('PipelineSharedLibR') _
+@Library('PipelineSharedLibR@main') _
 
 mobitelPipeline {
     appType = 'angular-nginx'
@@ -6,3 +6,4 @@ mobitelPipeline {
     environment = 'stg'
     namespace = 'intsys'
 }
+
