@@ -4,5 +4,6 @@ mobitelPipeline {
     appName = 'spring-app'
     appType = 'springboot'
     environment = 'stg'
-    namespace = 'intsys'
+    namespace = 'ecom-app'
 }
+
