@@ -5,5 +5,7 @@ mobitelPipeline {
     appType = 'springboot'
     environment = 'stg'
     namespace = 'ecom-app'
+    sonarEnabled = true
 }
+
 
