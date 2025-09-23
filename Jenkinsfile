@@ -1,4 +1,4 @@
-@Library('SharedRan@main') _
+@Library('SharedRanGH@jenkins') _
 mobitelPipeline {
   appType = 'springboot'
   appName = 'my-app'
