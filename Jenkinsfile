@@ -3,7 +3,7 @@ mobitelPipeline {
   appType = 'springboot'
   appName = 'my-app'
   environment = 'stg'
-  namespace = 'ecom-app'
+  namespace = 'app'
   exposePort = '8080'
   harbourSecret = 'harbour'
  }
